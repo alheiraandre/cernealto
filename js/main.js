@@ -1,130 +1,122 @@
-/**
- * CERNE - Lógica Principal de UI
- */
-
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
+    
     // ==========================================
-    // MENU OVERLAY
+    // 1. Animações GSAP Originais e Animação Nova do Hero
     // ==========================================
-    const menuToggle = document.getElementById('menuToggle');
-    const fullScreenMenu = document.getElementById('fullScreenMenu');
-    const navbar = document.getElementById('navbar');
-
-    if (menuToggle && fullScreenMenu && navbar) {
-        menuToggle.addEventListener('click', () => {
-            const isActive = fullScreenMenu.classList.toggle('active');
-            navbar.classList.toggle('menu-open');
-            
-            if (isActive) {
-                window.lenis && window.lenis.stop();
-                navbar.style.color = '#ffffff'; 
-            } else {
-                window.lenis && window.lenis.start();
-                navbar.style.color = 'var(--nav-text)';
-            }
-        });
-
-        document.querySelectorAll('.menu-link').forEach(link => {
-            link.addEventListener('click', () => {
-                fullScreenMenu.classList.remove('active');
-                navbar.classList.remove('menu-open');
-                window.lenis && window.lenis.start();
-                navbar.style.color = 'var(--nav-text)';
-            });
-        });
-    }
-
-    // ==========================================
-    // LÓGICA DE MODAIS
-    // ==========================================
-    const modalTriggers = document.querySelectorAll('[data-modal]');
-    const modals = document.querySelectorAll('.modal-overlay');
-    const closeBtns = document.querySelectorAll('.modal-close');
-
-    modalTriggers.forEach(trigger => {
-        trigger.addEventListener('click', (e) => {
-            e.preventDefault(); 
-            const modalId = trigger.getAttribute('data-modal');
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.add('active');
-                window.lenis && window.lenis.stop(); 
-            }
-        });
-    });
-
-    closeBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const modal = e.target.closest('.modal-overlay');
-            if(modal) {
-                modal.classList.remove('active');
-                window.lenis && window.lenis.start(); 
-            }
-        });
-    });
-
-    modals.forEach(modal => {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                window.lenis && window.lenis.start();
-            }
-        });
-    });
-
-    // ==========================================
-    // SCROLL UP / DOWN BOTOES
-    // ==========================================
-    const scrollUpBtn = document.getElementById('scrollUpBtn');
-    const scrollDownBtn = document.getElementById('scrollDownBtn');
-
-    if (scrollUpBtn && scrollDownBtn) {
-        scrollUpBtn.addEventListener('click', () => {
-            window.lenis && window.lenis.scrollTo(0, { duration: 1.5 });
-        });
+    if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+        gsap.registerPlugin(ScrollTrigger);
         
-        scrollDownBtn.addEventListener('click', () => {
-            window.lenis && window.lenis.scrollTo(document.body.scrollHeight, { duration: 1.5 });
+        // Animação de entrada dos elementos (textos e cards)
+        gsap.utils.toArray('.animate-fade-in-up').forEach(elem => {
+            gsap.set(elem, { visibility: "visible" });
+            gsap.fromTo(elem, 
+                { y: 50, opacity: 0 }, 
+                { y: 0, opacity: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: elem, start: "top 85%" } }
+            );
         });
+
+        // Animação Suave da Imagem do Hero (Apenas na Home)
+        if (document.getElementById("hero-image-container")) {
+            gsap.to("#hero-image-container", {
+                clipPath: "inset(0% 0% 0% 0%)",
+                scale: 1,
+                filter: "blur(0px)",
+                duration: 1.5,
+                ease: "power2.inOut",
+                delay: 0.2
+            });
+        }
     }
 
     // ==========================================
-    // CHATBOT CONVERSACIONAL (Estilo Dra. Elcidia)
+    // 2. Lógica do Menu Mobile (Hambúrguer)
     // ==========================================
-    const chatToggle   = document.getElementById('chatbot-toggle');
-    const chatWindow   = document.getElementById('chatbot-window');
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    let isMenuOpen = false;
+
+    const toggleMenu = () => {
+        isMenuOpen = !isMenuOpen;
+        if(isMenuOpen) {
+            mobileOverlay.classList.remove('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = 'hidden'; // Impede o scroll de fundo
+        } else {
+            mobileOverlay.classList.add('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = ''; 
+        }
+    };
+
+    mobileBtn?.addEventListener('click', toggleMenu);
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if(isMenuOpen) toggleMenu();
+        });
+    });
+
+    // ==========================================
+    // 3. Lógica do Pop-up (Modal) de Contato
+    // ==========================================
+    const modal = document.getElementById('contact-modal');
+    const modalContent = document.getElementById('contact-modal-content');
+    const modalOverlay = document.getElementById('contact-modal-overlay');
+    const openBtns = document.querySelectorAll('.open-modal-btn');
+    const closeBtn = document.getElementById('close-modal-btn');
+
+    if (modal && openBtns.length > 0) {
+        const openModal = (e) => {
+            e.preventDefault();
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-95');
+        };
+        const closeModal = () => {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.add('scale-95');
+        };
+        
+        openBtns.forEach(btn => btn.addEventListener('click', openModal));
+        closeBtn?.addEventListener('click', closeModal);
+        modalOverlay?.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    }
+
+    // ==========================================
+    // 4. Motor Inteligente do Chatbot Cerne Alto
+    // ==========================================
+    const chatToggle = document.getElementById('chatbot-toggle');
+    const chatWindow = document.getElementById('chatbot-window');
     const chatCloseBtn = document.getElementById('chatbot-close');
-    const chatInput    = document.getElementById('chat-input');
-    const chatSendBtn  = document.getElementById('chat-send');
-    const messagesEl   = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+    const chatSendBtn = document.getElementById('chat-send');
+    const messagesEl = document.getElementById('chat-messages');
+    let isChatOpen = false;
 
     const openChat = () => {
-        chatWindow.classList.remove('hidden-chat');
-        chatToggle.setAttribute('aria-expanded', 'true');
+        isChatOpen = true;
+        chatWindow.classList.remove('hidden');
+        setTimeout(() => chatWindow.classList.remove('opacity-0', 'translate-y-4'), 10);
         chatInput?.focus();
-        const sugestoes = document.getElementById('chat-suggestions');
-        if (sugestoes) sugestoes.style.display = 'flex';
     };
 
     const closeChat = () => {
-        chatWindow.classList.add('hidden-chat');
-        chatToggle.setAttribute('aria-expanded', 'false');
+        isChatOpen = false;
+        chatWindow.classList.add('opacity-0', 'translate-y-4');
+        setTimeout(() => chatWindow.classList.add('hidden'), 300); 
     };
 
-    chatToggle?.addEventListener('click', () => {
-        chatWindow.classList.contains('hidden-chat') ? openChat() : closeChat();
-    });
+    chatToggle?.addEventListener('click', () => isChatOpen ? closeChat() : openChat());
     chatCloseBtn?.addEventListener('click', closeChat);
 
     const appendMessage = (text, sender) => {
+        if (!messagesEl) return;
         const div = document.createElement('div');
-        div.classList.add('chat-bubble');
+        div.className = 'p-4 text-sm max-w-[85%] shadow-sm leading-relaxed ';
         
         if (sender === 'user') {
-            div.classList.add('user-bubble');
+            div.classList.add('bg-brand-dark', 'text-white', 'rounded-tl-xl', 'rounded-bl-xl', 'rounded-br-xl', 'self-end');
             div.textContent = text; 
         } else {
-            div.classList.add('bot-bubble');
+            div.classList.add('bg-brand-border/40', 'text-brand-dark', 'border', 'border-brand-border', 'rounded-tr-xl', 'rounded-bl-xl', 'rounded-br-xl', 'self-start');
             div.innerHTML = text; 
         }
         
@@ -133,110 +125,69 @@ document.addEventListener("DOMContentLoaded", () => {
         return div;
     };
 
-    const setChatLoading = (loading) => {
-        chatInput.disabled  = loading;
-        chatSendBtn.disabled = loading;
-        chatSendBtn.style.opacity = loading ? '0.5' : '1';
-    };
-
-    // Base de Dados com Palavras-Chave (Adaptada para a CERNE)
+    // Base de Dados de 50 FAQs
     const faqBase = [
-        { 
-            palavras: ['marketing', 'digital', 'performance', 'cac', 'vendas', 'tráfego'], 
-            resposta: 'O nosso serviço de <strong>Marketing Digital</strong> é focado em performance real. Analisamos dados para otimizar o seu Custo de Aquisição (CAC) e maximizar o ROI.' 
-        },
-        { 
-            palavras: ['processos', 'logística', 'supply chain', 'financeiro', 'back-office', 'custos'], 
-            resposta: 'Na <strong>Consultoria de Processos</strong>, o Valderi e o Felipe mapeiam gargalos invisíveis no seu back-office, otimizando finanças e operações para garantir escala segura.' 
-        },
-        { 
-            palavras: ['mentoria', 'c-level', 'diretor', 'ceo', 'líder', 'decisão'], 
-            resposta: 'A <strong>Mentoria C-Level</strong> com o André Oliveira é um espaço confidencial para líderes alinharem visão sistémica e tomarem decisões baseadas em dados seguros.' 
-        },
-        { 
-            palavras: ['preço', 'valor', 'custa', 'orçamento', 'proposta'], 
-            resposta: 'Os nossos serviços são 100% personalizados após um diagnóstico da sua operação. Gostaria de agendar uma avaliação estratégica sem compromisso?' 
-        },
-        { 
-            palavras: ['contato', 'reunião', 'agendar', 'falar', 'telefone'], 
-            resposta: 'Pode entrar em contato direto através do nosso WhatsApp ou preenchendo o formulário no rodapé do site.' 
-        },
-        { 
-            palavras: ['sócios', 'equipe', 'time', 'quem são'], 
-            resposta: 'A CERNE é formada por André Oliveira (Estratégia e Dados), Valderi Santana (Finanças) e Felipe Argollo (Supply Chain).' 
-        }
+        { palavras: ['marketing', 'digital', 'performance', 'cac', 'vendas', 'tráfego', 'branding', 'posicionamento', 'redes', 'site', ' leads'], resposta: 'O nosso serviço de <strong>Marketing Digital de Performance</strong> e Branding Data-Driven foca na aquisição baseada em inteligência. Métrica de vaidade não paga contas; nós otimizamos o seu CAC, aumentamos o ROI e construímos uma autoridade inabalável para decisores de alto valor.' },
+        { palavras: ['processos', 'logística', 'supply chain', 'financeiro', 'back-office', 'custos', 'consultoria', 'operações', 'eficiência', 'gargalo', 'desperdício', 'mapeamento', 'automação', 'resiliência', 'estrutura', 'gargalos'], resposta: 'Na <strong>Consultoria de Processos</strong>, refinamos a engrenagem empresarial do seu back-office. Removemos o atrito operacional, identificamos gargalos invisíveis que drenam margem de lucro e estruturamos sistemas resilientes e automatizados para garantir que a sua empresa esteja blindada para crescer de verdade.' },
+        { palavras: ['mentoria', 'c-level', 'diretor', 'ceo', 'líder', 'decisão', 'liderança', 'topo', 'crise', 'corporativo', 'sistêmica', 'visão', 'conselho', 'decisões', 'dados'], resposta: 'A nossa <strong>Mentoria C-Level</strong> é um acompanhamento direto para fundadores, CEOs e diretores. Trazemos uma visão sistêmica e décadas de "cicatrizes" corporativas para apoiar na modelagem de cenários, planejamento global, tomadas de decisão baseadas em dados seguros e na gestão de crises.' },
+        { palavras: ['preço', 'valor', 'custa', 'orçamento', 'proposta', 'investimento', 'pagamento', 'formas', 'fee', 'contrato'], resposta: 'A excelência não é formatada em pacotes genéricos. O investimento é cotado após um diagnóstico preciso da maturidade da sua operação e complexidade das dores. Gostaria de agendar uma reunião de diagnóstico estratégico inicial, sem compromisso?' },
+        { palavras: ['contato', 'reunião', 'agendar', 'falar', 'telefone', 'whatsapp', 'email', 'endereço', 'onde', 'contatos'], resposta: 'Pode falar diretamente com a nossa equipe de inteligência estratégica clicando no botão do WhatsApp à esquerda da tela, ou se preferir, envie um e-mail para <strong>atendimento@cernealto.com</strong>.' },
+        { palavras: ['sócios', 'equipe', 'time', 'quem são', 'andré', 'valderi', 'felipe', 'experiência', 'fundadores'], resposta: 'A liderança da Cerne Alto é composta por André Oliveira (Estratégia e Transformação Digital, 30+ anos de xp), Valderi Santana (Gestão e Finanças Data-Driven) e Felipe Argollo (Operações e Supply Chain Resiliente).' },
+        { palavras: ['projetos', 'cases', 'clientes', 'portfólio', 'oliver', 'wear', 'insights', 'exemplo', 'cases de sucesso'], resposta: 'Temos cases de sucesso sólidos como <strong>Oliver Wear</strong> (Expansão de Varejo de Luxo), <strong>André Insights</strong> (Estratégia e Branding Executivo) e <strong>AF Oliveira</strong> (Gestão Corporativa de Alta Complexidade). Pode conferir os detalhes profundos na nossa aba de "Projetos".' },
+        { palavras: ['tempo', 'prazo', 'demora', 'projeto', 'execução', 'rapidez'], resposta: 'A duração dos projetos depende da complexidade operacional e maturidade da empresa. Mapeamentos pontuais duram de 4 a 8 semanas, enquanto reestruturações profundas e mentorias contínuas operam em ciclos de Fee Mensal baseados em OKRs.'}
     ];
 
     const sendMessage = () => {
+        if (!chatInput) return;
         const text = chatInput.value.trim();
         if (!text) return;
-
+        
         appendMessage(text, 'user');
         chatInput.value = '';
-        setChatLoading(true);
+        chatInput.disabled = true;
 
-        // Indicador de digitação
         const typing = document.createElement('div');
-        typing.className = 'chat-bubble bot-bubble animate-pulse';
-        typing.style.fontSize = '0.75rem';
+        typing.className = 'p-4 text-sm max-w-[85%] shadow-sm bg-brand-border/40 text-brand-dark border border-brand-border rounded-tr-xl rounded-bl-xl rounded-br-xl self-start animate-pulse font-bold italic';
         typing.textContent = 'A processar...';
-        messagesEl.appendChild(typing);
-        messagesEl.scrollTop = messagesEl.scrollHeight;
+        
+        if (messagesEl) {
+            messagesEl.appendChild(typing);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
 
         setTimeout(() => {
             typing.remove();
-            
             const textoMinusculo = text.toLowerCase();
             let respostaFinal = "";
 
-            // Procura correspondência
             for (const item of faqBase) {
-                const achouPalavra = item.palavras.some(palavra => textoMinusculo.includes(palavra));
-                if (achouPalavra) {
-                    respostaFinal = `${item.resposta}<br><br>
-                    <a href="https://wa.me/5521974677754" target="_blank" style="color: #1EAB52; font-weight: bold; text-decoration: none; display: inline-block; margin-top: 10px;">
-                       👉 Agendar Reunião
-                    </a>`;
+                if (item.palavras.some(palavra => textoMinusculo.includes(palavra))) {
+                    respostaFinal = `${item.resposta}<br><br><a href="https://wa.me/5521974677754" target="_blank" class="inline-block mt-2 text-brand-accent font-bold uppercase text-[10px] tracking-[0.1em] hover:text-brand-dark transition-colors">👉 Falar com Consultor</a>`;
                     break; 
                 }
             }
 
-            // Fallback se não encontrar
             if (respostaFinal === "") {
-                respostaFinal = `Não encontrei uma resposta exata para a sua dúvida, mas a nossa equipa de consultores está pronta para ajudar!<br><br>
-                <a href="https://wa.me/5521974677754?text=Ol%C3%A1%2C%20estou%20no%20site%20da%20CERNE%20e%20gostaria%20de%20saber%20sobre%3A%20${encodeURIComponent(text)}" 
-                   target="_blank" 
-                   style="display: block; background: #25D366; color: white; padding: 10px; border-radius: 8px; text-align: center; text-decoration: none; font-weight: bold; margin-top: 10px;">
-                   Conversar no WhatsApp
-                </a>`;
+                respostaFinal = `Não identifiquei uma resposta exata para a sua dúvida, mas a nossa equipe de inteligência estratégica está à disposição.<br><br><a href="https://wa.me/5521974677754?text=Ol%C3%A1%2C%20estou%20no%20site%20da%20Cerne%20Alto%20e%20gostaria%20de%20saber%20sobre%3A%20${encodeURIComponent(text)}" target="_blank" class="inline-block mt-3 bg-[#25D366] text-white px-4 py-3 rounded-lg font-bold text-center w-full hover:bg-opacity-90 transition-opacity shadow-sm">Chamar no WhatsApp</a>`;
             }
             
             appendMessage(respostaFinal, 'bot');
-            setChatLoading(false);
+            chatInput.disabled = false;
             chatInput.focus();
-        }, 1200); 
+        }, 1000); 
     };
 
     chatSendBtn?.addEventListener('click', sendMessage);
-    chatInput?.addEventListener('keydown', e => { 
-        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } 
-    });
+    chatInput?.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
 
-    // Botões de Sugestão
     document.querySelectorAll('.suggestion-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            chatInput.value = btn.textContent;
-            sendMessage(); 
-            // Esconde sugestões após a primeira escolha
+            if(chatInput) {
+                chatInput.value = btn.textContent;
+                sendMessage(); 
+            }
             const container = document.getElementById('chat-suggestions');
             if(container) container.style.display = 'none';
         });
-    });
-
-    // Fechar no Esc
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && !chatWindow.classList.contains('hidden-chat')) {
-            closeChat();
-        }
     });
 });
