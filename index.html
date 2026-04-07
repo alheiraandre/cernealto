@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Início | Cerne Alto</title>
+    <title>Cerne Alto | Consultoria Estratégica</title>
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1B1C18">
 
     <link rel="icon" type="image/webp" href="./img/favicon.webp">
     <link rel="apple-touch-icon" href="./img/favicon.webp">
-    
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1B1C18">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
@@ -21,34 +21,47 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { dark: '#1B1C18', accent: '#635E50', light: '#FBF9F3', border: '#eae8e2' },
-                        "background": "#FBF9F3", "surface": "#FBF9F3", "primary": "#1B1C18",
-                        "on-primary": "#ffffff", "on-surface": "#1B1C18", "on-surface-variant": "#44474b", "outline": "#75777b"
+                        brand: { 
+                            dark: '#1B1C18',
+                            accent: '#635E50',
+                            light: '#FBF9F3',
+                            border: '#eae8e2'
+                        },
+                        "background": "#FBF9F3",
+                        "surface": "#FBF9F3",
+                        "primary": "#1B1C18",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#1B1C18",
+                        "on-surface-variant": "#44474b",
+                        "outline": "#75777b"
                     },
-                    fontFamily: { "headline": ["Noto Serif"], "body": ["Inter"], "sans": ["Inter"] }
+                    fontFamily: {
+                        "headline": ["Noto Serif"],
+                        "body": ["Inter"],
+                        "sans": ["Inter"]
+                    }
                 }
             }
         }
     </script>
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
-        .animate-fade-in-up { opacity: 0; visibility: hidden; }
         .ghost-border { outline: 1px solid rgba(27, 28, 24, 0.05); }
+        .animate-fade-in-up { opacity: 0; visibility: hidden; }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-background text-on-surface font-body selection:bg-brand-accent selection:text-white overflow-x-hidden">
+<body class="bg-background text-on-surface font-body selection:bg-brand-accent selection:text-white">
 
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/10 flex justify-between items-center w-full px-8 md:px-16 py-4 mx-auto transition-all duration-300">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/10 flex justify-between items-center w-full px-8 md:px-16 py-4 mx-auto">
         <a href="index.html" class="flex items-center z-[60] relative">
             <img src="./img/cernealto1.webp" alt="Cerne Alto" class="h-14 md:h-20 w-auto object-contain">
         </a>
         <div class="hidden md:flex items-center space-x-12 z-[60] relative">
-            <a class="font-sans text-[14px] font-bold uppercase tracking-[0.2em] text-white hover:text-white transition-all duration-300" href="index.html">Início</a>
+            <a class="font-sans text-[14px] font-bold uppercase tracking-[0.2em] text-white hover:text-brand-accent transition-all duration-300" href="index.html">Início</a>
             <a class="font-sans text-[14px] font-bold uppercase tracking-[0.2em] text-white/50 hover:text-white transition-all duration-300" href="servico.html">Serviços</a>
             <a class="font-sans text-[14px] font-bold uppercase tracking-[0.2em] text-white/50 hover:text-white transition-all duration-300" href="projetos.html">Projetos</a>
-            
             <a class="install-app-btn font-sans text-[14px] font-bold uppercase tracking-[0.2em] text-brand-accent hover:text-white transition-all duration-300 cursor-pointer hidden">Instalar App</a>
         </div>
         <a href="#" class="open-modal-btn bg-white text-black px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-brand-accent hover:text-white transition-colors hidden md:block z-[60] relative">Consultoria</a>
@@ -65,49 +78,130 @@
             <a href="index.html" class="mobile-link font-headline text-4xl italic text-white hover:text-brand-accent transition-colors">Início</a>
             <a href="servico.html" class="mobile-link font-headline text-4xl italic text-white hover:text-brand-accent transition-colors">Serviços</a>
             <a href="projetos.html" class="mobile-link font-headline text-4xl italic text-white hover:text-brand-accent transition-colors">Projetos</a>
-            
             <a class="install-app-btn mobile-link font-headline text-4xl italic text-brand-accent hover:text-white transition-colors cursor-pointer hidden">Instalar App</a>
-
             <a href="#" class="open-modal-btn mobile-link mt-8 inline-block bg-white text-black px-12 py-5 font-bold uppercase tracking-widest text-xs hover:bg-brand-accent hover:text-white transition-colors shadow-lg">Consultoria</a>
         </div>
     </div>
 
     <main>
-        <section class="relative w-full min-h-screen flex flex-col justify-center items-start overflow-hidden bg-brand-dark pt-40 pb-20 px-8 md:px-16">
-            <div class="absolute inset-0 z-0">
-                <img class="w-full h-full object-cover grayscale opacity-30 transition-all duration-1000" alt="Cerne Alto Strategy" src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1920&q=80">
-                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-transparent"></div>
+        <section class="relative min-h-[100vh] flex flex-col justify-center px-8 md:px-24 py-32 overflow-hidden bg-background">
+            <div id="hero-image-container" class="absolute top-0 right-0 w-full md:w-3/5 h-full z-0" style="clip-path: inset(0 100% 0 0); transform: scale(1.1); filter: blur(10px);">
+                <img class="w-full h-full object-cover grayscale opacity-90 transition-all duration-1000 hover:grayscale-0" alt="Cerne Alto Consulting" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80">
+                <div class="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent"></div>
             </div>
-            <div class="relative z-10 w-full max-w-7xl mx-auto animate-fade-in-up">
-                <p class="font-sans text-[10px] uppercase tracking-[0.4em] text-brand-accent font-bold mb-6 border border-brand-accent/30 px-4 py-2 w-max rounded-full text-white">Consultoria C-Level</p>
-                <h1 class="font-headline text-6xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tighter italic text-white mb-8">
-                    Excelência <br><span class="text-brand-accent not-italic font-bold">Refinada.</span>
+            <div class="relative z-10 max-w-4xl pt-16">
+                <span class="inline-block font-sans text-[10px] tracking-[0.3em] text-brand-accent mb-6 uppercase font-bold border border-brand-accent/30 px-4 py-2 animate-fade-in-up">Estratégia & Alta Performance</span>
+                <h1 class="text-6xl md:text-8xl font-headline leading-none tracking-tighter mb-8 italic text-brand-dark animate-fade-in-up">
+                    DO CERNE AO ALTO. <br>
+                    <span class="not-italic font-bold text-brand-accent">RESULTADOS REAIS.</span>
                 </h1>
-                <p class="font-body text-brand-light/70 text-base md:text-xl leading-relaxed max-w-2xl mb-10">
-                    Trabalhamos a arquitetura do seu negócio. Traduzimos complexidade em clareza estratégica, transformando a sua operação em uma vantagem competitiva absoluta.
+                <p class="text-lg md:text-xl text-brand-dark/80 max-w-xl font-light leading-relaxed animate-fade-in-up">
+                    Elevando negócios através da precisão estratégica. Nossa metodologia foca na estrutura vital da sua empresa para alcançar o topo com solidez e visão de longo prazo.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="servico.html" class="inline-block bg-white text-brand-dark px-10 py-4 font-bold uppercase tracking-widest text-xs hover:bg-brand-accent hover:text-white transition-colors text-center shadow-lg">Nossas Soluções</a>
-                    <a href="projetos.html" class="inline-block border border-white/20 text-white px-10 py-4 font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-brand-dark transition-colors text-center">Ver Projetos</a>
+                <div class="mt-12 flex gap-4 animate-fade-in-up">
+                    <a href="servico.html" class="bg-brand-dark text-white px-10 py-5 text-xs uppercase font-bold tracking-widest transition-all hover:bg-brand-accent">
+                        CONHEÇA O MÉTODO
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section class="py-32 px-8 md:px-16 max-w-7xl mx-auto bg-background ghost-border animate-fade-in-up">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <span class="font-sans text-[10px] font-bold uppercase tracking-widest text-brand-accent">A Diferença Cerne Alto</span>
-                    <h2 class="font-headline text-5xl md:text-6xl tracking-tighter mt-4 mb-8 text-brand-dark italic">Visão de <span class="not-italic font-bold text-brand-accent">Longo Prazo.</span></h2>
-                    <p class="font-body text-on-surface-variant text-base leading-relaxed mb-6">
-                        No mercado atual, atenção e recursos são ativos disputados. Não trabalhamos com achismos. Desenvolvemos estratégias baseadas em dados reais, eliminando o ruído e concentrando cada decisão naquilo que realmente move o ponteiro.
+        <section class="py-32 px-8 md:px-24 bg-brand-border/30 ghost-border">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-20 items-start">
+                <div class="md:w-1/3 animate-fade-in-up">
+                    <h2 class="text-3xl font-headline font-bold italic border-l-2 border-brand-accent pl-6 text-brand-dark">Nossa Filosofia</h2>
+                </div>
+                <div class="md:w-2/3 animate-fade-in-up">
+                    <p class="text-3xl md:text-5xl font-headline font-light leading-snug text-brand-dark">
+                        "Para crescer de verdade, é preciso entender o que está no cerne. A expansão só é sustentável quando a base é inabalável."
                     </p>
-                    <a href="servico.html" class="inline-flex items-center gap-2 font-sans text-xs font-bold uppercase tracking-widest text-brand-dark hover:text-brand-accent transition-colors w-max mt-4">
-                        Conheça nossa Metodologia <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                    </a>
+                    <div class="mt-12 space-y-8 max-w-2xl">
+                        <p class="text-lg text-on-surface-variant font-light leading-relaxed">
+                            Não acreditamos em soluções rápidas ou superficiais. Nossa consultoria penetra na estrutura da sua organização, refinando processos e otimizando a cultura para que o crescimento seja uma consequência natural da excelência.
+                        </p>
+                    </div>
                 </div>
-                <div class="relative aspect-square bg-brand-border overflow-hidden shadow-2xl">
-                    <img class="w-full h-full object-cover grayscale" alt="Visão Estratégica" src="https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80">
+            </div>
+        </section>
+
+        <section class="py-32 px-8 md:px-24 bg-background ghost-border">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-20 animate-fade-in-up">
+                    <p class="font-sans text-xs tracking-[0.2em] text-outline mb-4 uppercase">Leadership</p>
+                    <h2 class="text-5xl font-headline font-bold text-brand-dark">Quem está no cerne da Cerne</h2>
                 </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+                    <div class="group animate-fade-in-up">
+                        <div class="aspect-[3/4] mb-8 overflow-hidden bg-brand-border">
+                            <img class="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0" alt="André Oliveira" src="https://cernealto.com/img/andre.webp">
+                        </div>
+                        <h3 class="text-2xl font-headline font-bold mb-1 text-brand-dark">André Oliveira</h3>
+                        <p class="text-sm font-sans tracking-widest text-brand-accent uppercase mb-4">Estratégia · Transf. Digital · Dados</p>
+                        <p class="text-on-surface-variant font-light leading-relaxed">M.Sc. em Marketing Digital e Analytics, PMP® certificado e mais de 30 anos transformando desafios complexos em resultados mensuráveis. André passou por Equinix, HPE, TJRJ e LIGHT e carrega na bagagem um número que diz tudo: 95%+ de taxa de sucesso em programas de alta complexidade. Professor de Dados e Power BI no Firjan Senai Maracanã, ele acredita que tecnologia sem estratégia é apenas ferramenta. Na CERNE, é quem garante que o diagnóstico precede qualquer solução.</p>
+                    </div>
+                    <div class="group animate-fade-in-up">
+                        <div class="aspect-[3/4] mb-8 overflow-hidden bg-brand-border">
+                            <img class="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0" alt="Valderi Santana" src="https://cernealto.com/img/valderi.webp">
+                        </div>
+                        <h3 class="text-2xl font-headline font-bold mb-1 text-brand-dark">Valderi Santana</h3>
+                        <p class="text-sm font-sans tracking-widest text-brand-accent uppercase mb-4">Gestão · Finanças · Processos</p>
+                        <p class="text-on-surface-variant font-light leading-relaxed">Profissional da área financeira com experiência em controladoria, contas a pagar e contas a receber, orçamento, fluxo de caixa e análise de indicadores, apoiando a tomada de decisões estratégicas. Formação superior completa e pós-graduação em Controladoria e Finanças, com domínio de Excel avançado, Power BI e SAP. Vivência em gestão de contratos, compras, fornecedores, conciliações financeiras e suporte a auditorias, com perfil analítico, organizado e orientado a resultados.</p>
+                    </div>
+                    <div class="group animate-fade-in-up">
+                        <div class="aspect-[3/4] mb-8 overflow-hidden bg-brand-border">
+                            <img class="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0" alt="Felipe Argollo" src="https://cernealto.com/img/felipe.webp">
+                        </div>
+                        <h3 class="text-2xl font-headline font-bold mb-1 text-brand-dark">Felipe Argollo</h3>
+                        <p class="text-sm font-sans tracking-widest text-brand-accent uppercase mb-4">Operações · Supply Chain · Execução</p>
+                        <p class="text-on-surface-variant font-light leading-relaxed">Formado em Gestão da Cadeia de Suprimentos e Logística pela Unigranrio, Felipe traz o que poucos consultores têm: entendimento real de como as operações funcionam no nível da execução. É quem sabe que processos falham não no papel, mas na prática e que uma cadeia bem gerida é o cerne de qualquer negócio que queira crescer de verdade.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-32 px-8 md:px-24 bg-brand-border/30 ghost-border">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-20 animate-fade-in-up">
+                    <div>
+                        <p class="font-sans text-xs tracking-[0.2em] text-outline mb-4 uppercase">Especialidades</p>
+                        <h2 class="text-5xl font-headline font-bold text-brand-dark">Nosso Portfólio de Atuação</h2>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-1">
+                    <div class="bg-background p-12 ghost-border transition-all duration-500 hover:bg-brand-dark group animate-fade-in-up">
+                        <span class="material-symbols-outlined text-4xl mb-8 text-brand-accent group-hover:text-brand-light transition-colors">digital_out_of_home</span>
+                        <h3 class="text-2xl font-headline font-bold mb-6 text-brand-dark group-hover:text-brand-light transition-colors">Marketing Digital</h3>
+                        <p class="text-on-surface-variant mb-10 leading-relaxed group-hover:text-brand-light/80 transition-colors">Estratégias de aquisição baseadas em dados e performance, garantindo que sua marca alcance o público certo.</p>
+                        <a href="servico.html" class="inline-flex items-center gap-2 text-sm font-bold tracking-widest uppercase border-b border-brand-accent pb-1 group-hover:text-white group-hover:border-white transition-colors">
+                            Ver Área <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                    </div>
+                    <div class="bg-background p-12 ghost-border transition-all duration-500 hover:bg-brand-dark group animate-fade-in-up">
+                        <span class="material-symbols-outlined text-4xl mb-8 text-brand-accent group-hover:text-brand-light transition-colors">settings_account_box</span>
+                        <h3 class="text-2xl font-headline font-bold mb-6 text-brand-dark group-hover:text-brand-light transition-colors">Consultoria e Processos</h3>
+                        <p class="text-on-surface-variant mb-10 leading-relaxed group-hover:text-brand-light/80 transition-colors">Refinamento da engrenagem empresarial. Otimizamos o fluxo de trabalho para maximizar o rendimento operacional.</p>
+                        <a href="servico.html" class="inline-flex items-center gap-2 text-sm font-bold tracking-widest uppercase border-b border-brand-accent pb-1 group-hover:text-white group-hover:border-white transition-colors">
+                            Ver Área <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                    </div>
+                    <div class="bg-background p-12 ghost-border transition-all duration-500 hover:bg-brand-dark group animate-fade-in-up">
+                        <span class="material-symbols-outlined text-4xl mb-8 text-brand-accent group-hover:text-brand-light transition-colors">model_training</span>
+                        <h3 class="text-2xl font-headline font-bold mb-6 text-brand-dark group-hover:text-brand-light transition-colors">Mentoria C-Level</h3>
+                        <p class="text-on-surface-variant mb-10 leading-relaxed group-hover:text-brand-light/80 transition-colors">Acompanhamento direto para lideranças. Tomada de decisão estratégica com suporte de quem trilhou o caminho.</p>
+                        <a href="servico.html" class="inline-flex items-center gap-2 text-sm font-bold tracking-widest uppercase border-b border-brand-accent pb-1 group-hover:text-white group-hover:border-white transition-colors">
+                            Ver Área <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-40 px-8 md:px-24 bg-brand-dark text-brand-light text-center ghost-border">
+            <div class="max-w-4xl mx-auto animate-fade-in-up">
+                <h2 class="text-5xl md:text-7xl font-headline font-bold mb-12 italic tracking-tight">VAMOS TRABALHAR <span class="text-brand-accent">JUNTOS?</span></h2>
+                <a href="#" class="open-modal-btn inline-block bg-white text-brand-dark px-16 py-6 text-sm font-bold tracking-[0.2em] transition-transform hover:scale-105 duration-200 uppercase mb-16 shadow-lg">
+                    COMEÇAR AGORA
+                </a>
             </div>
         </section>
     </main>
@@ -160,7 +254,7 @@
                 <span class="material-symbols-outlined text-3xl">close</span>
             </button>
             <span class="font-sans text-[10px] uppercase tracking-widest text-brand-accent font-bold mb-4 block">Fale Conosco</span>
-            <h3 class="font-headline text-4xl md:text-5xl tracking-tighter mb-8 text-brand-dark italic">Solicite sua <span class="not-italic font-bold text-brand-accent">Proposta.</span></h3>
+            <h3 class="font-headline text-4xl md:text-5xl tracking-tighter mb-8 text-brand-dark italic">Vamos <span class="not-italic font-bold text-brand-accent">Conversar.</span></h3>
             <form action="#" method="POST" class="space-y-6">
                 <div>
                     <label for="nome" class="block font-sans text-[10px] uppercase tracking-widest text-brand-dark/70 font-bold mb-1">Nome Completo *</label>
@@ -177,21 +271,11 @@
                     </div>
                 </div>
                 <div>
-                    <label for="servico" class="block font-sans text-[10px] uppercase tracking-widest text-brand-dark/70 font-bold mb-1">Serviço de Interesse *</label>
-                    <select id="servico" name="servico" required class="w-full bg-transparent border-b border-brand-border/50 px-0 py-3 text-brand-dark focus:border-brand-accent focus:ring-0 transition-colors outline-none text-sm cursor-pointer appearance-none">
-                        <option value="" disabled selected>Selecione uma opção...</option>
-                        <option value="marketing">Estratégia de Marketing Digital</option>
-                        <option value="consultoria">Consultoria e Processos</option>
-                        <option value="mentoria">Mentoria C-Level</option>
-                        <option value="outro">Ainda não tenho certeza</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="mensagem" class="block font-sans text-[10px] uppercase tracking-widest text-brand-dark/70 font-bold mb-1">Detalhes do Projeto / Desafio Atual *</label>
-                    <textarea id="mensagem" name="mensagem" required rows="3" placeholder="Conte-nos brevemente o que sua empresa precisa e quais são seus objetivos..." class="w-full bg-transparent border-b border-brand-border/50 px-0 py-3 text-brand-dark focus:border-brand-accent focus:ring-0 transition-colors outline-none resize-none text-sm"></textarea>
+                    <label for="mensagem" class="block font-sans text-[10px] uppercase tracking-widest text-brand-dark/70 font-bold mb-1">Como podemos ajudar?</label>
+                    <textarea id="mensagem" name="mensagem" rows="3" class="w-full bg-transparent border-b border-brand-border/50 px-0 py-3 text-brand-dark focus:border-brand-accent focus:ring-0 transition-colors outline-none resize-none text-sm"></textarea>
                 </div>
                 <button type="submit" class="w-full bg-brand-dark text-white px-8 py-5 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-brand-accent transition-colors mt-8">
-                    Enviar Solicitação
+                    Enviar Mensagem
                 </button>
             </form>
         </div>
@@ -200,7 +284,6 @@
     <a href="https://wa.me/5521974677754" target="_blank" class="fixed bottom-8 left-8 z-[999] bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 flex items-center justify-center" aria-label="WhatsApp">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
     </a>
-
     <div class="fixed bottom-8 right-8 z-[999] flex flex-col items-end">
         <div id="chatbot-window" class="hidden opacity-0 translate-y-4 transition-all duration-300 mb-4 w-[340px] md:w-[380px] h-[520px] bg-background border border-brand-border rounded-xl shadow-2xl flex flex-col overflow-hidden origin-bottom-right">
             <div class="bg-brand-dark text-white p-5 flex justify-between items-center">
@@ -230,10 +313,11 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="./js/main.js"></script>
-    
+
     <script>
-        // LÓGICA DO PWA (INSTALAÇÃO)
         let deferredPrompt;
         const installModal = document.getElementById('install-modal');
         const installModalOverlay = document.getElementById('install-modal-overlay');
