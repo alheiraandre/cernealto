@@ -155,21 +155,21 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-1 animate-fade-in-up shadow-inner mb-12">
                     <div class="group relative aspect-[3/4] overflow-hidden bg-brand-dark">
                         <img class="w-full h-full object-cover grayscale opacity-60 transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100" alt="Decisão" src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80"/>
-                        <div class="absolute bottom-8 left-8">
+                        <div class="absolute bottom-8 left-8 pr-4">
                             <h3 class="font-headline text-white text-2xl italic mb-2">Decisão</h3>
                             <p class="text-brand-light text-xs uppercase tracking-widest font-bold">Desenvolvemos a capacidade analítica do líder para mapear riscos, simular cenários futuros e tomar decisões de alto impacto com convicção — mesmo sob incerteza.</p>
                         </div>
                     </div>
                     <div class="group relative aspect-[3/4] overflow-hidden bg-brand-dark">
                         <img class="w-full h-full object-cover grayscale opacity-60 transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100" alt="Visão" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"/>
-                        <div class="absolute bottom-8 left-8">
+                        <div class="absolute bottom-8 left-8 pr-4">
                             <h3 class="font-headline text-white text-2xl italic mb-2">Visão</h3>
                             <p class="text-brand-light text-xs uppercase tracking-widest font-bold">Trabalhamos o pensamento sistêmico do executivo: como conectar estratégia de longo prazo com execução diária, alinhando pessoas, recursos e propósito em torno de um norte claro.</p>
                         </div>
                     </div>
                     <div class="group relative aspect-[3/4] overflow-hidden bg-brand-dark">
                         <img class="w-full h-full object-cover grayscale opacity-60 transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100" alt="Legado" src="https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80"/>
-                        <div class="absolute bottom-8 left-8">
+                        <div class="absolute bottom-8 left-8 pr-4">
                             <h3 class="font-headline text-white text-2xl italic mb-2">Legado</h3>
                             <p class="text-brand-light text-xs uppercase tracking-widest font-bold">Construímos junto ao líder uma cultura organizacional que não depende apenas de sua presença para performar — criando equipes autônomas, engajadas e orientadas a resultados consistentes.</p>
                         </div>
@@ -275,5 +275,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="./js/main.js"></script>
+
+    <script>
+        window.addEventListener('load', function() {
+            // Verifica se a URL atual contém uma âncora (ex: #marketing)
+            if (window.location.hash) {
+                // Dá um pequeno atraso de meio segundo para o GSAP renderizar a página
+                setTimeout(function() {
+                    const element = document.querySelector(window.location.hash);
+                    if (element) {
+                        // Altura do menu para não esconder o título
+                        const navHeight = 100; 
+                        const bodyRect = document.body.getBoundingClientRect().top;
+                        const elementRect = element.getBoundingClientRect().top;
+                        const elementPosition = elementRect - bodyRect;
+                        const offsetPosition = elementPosition - navHeight;
+
+                        // Rola a página suavemente até o elemento
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 500); 
+            }
+        });
+    </script>
 </body>
 </html>
